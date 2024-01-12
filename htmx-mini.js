@@ -8,18 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let element = elements[i];
 
         let type = element.getAttribute('data-hxm-req');
-        if (!requestTypes.includes(type)) {
+        if (!requestTypes.includes(type.toLowerCase())) {
             throw new Error(`Invalid request type: ${type}. It has to be one of ${requestTypes.join(', ')}`);
         }
 
-        // Main attributes
         let url = element.getAttribute('data-hxm-url');
         let trigger = element.getAttribute('data-hxm-trigger');
         let target = element.getAttribute('data-hxm-target');
         let swap = element.getAttribute('data-hxm-swap');
-
-        // Modifiers
-        let delay = element.getAttribute('data-hxm-delay');
 
         if (!url) {
             url = window.location.href;
@@ -40,11 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        let targets = [element];
-        if (target) {
-            targets = document.querySelectorAll(target);
-        }
-
         if (!swap) {
             swap = 'innerHTML';
         }
@@ -53,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error(`Invalid swap mode: ${swap}. It has to be one of ${swapMode.join(', ')}`);
         }
 
-        elementMap[element] = { url, type, trigger, targets, swap, delay };
+        elementMap[element] = { url, type, trigger, target, swap };
         element.addEventListener(trigger, (event) => {
             event.preventDefault();
 
@@ -69,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             return;
                         }
 
-                        let targets = el.targets;
+                        let targets = el.target ? document.querySelectorAll(el.target) : [event.currentTarget];
                         let adjacent = (el.swap != 'innerHTML' && el.swap != 'outerHTML');
                         for (let i = 0; i < targets.length; i++) {
                             if (el.swap == 'delete') {
@@ -93,14 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.currentTarget.tagName.toLowerCase() === 'form') {
                 data = new FormData(event.currentTarget);
             }
-            
-            if (el.delay) {
-                setTimeout(() => {
-                    xhr.send(data);
-                }, el.delay);
-                return;
-            }
-            
+
             xhr.send(data);
         })
     }
