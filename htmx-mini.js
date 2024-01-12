@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error(`Invalid swap mode: ${swap}. It has to be one of ${swapMode.join(', ')}`);
         }
 
-        elementMap[element] = { url, type, trigger, target, swap };
+        elementMap[element] = { url, type, target, swap };
         element.addEventListener(trigger, (event) => {
             event.preventDefault();
 
