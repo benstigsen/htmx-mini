@@ -55,11 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             xhr.onreadystatechange = () => {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     try {
-                        let response = xhr.responseText;
-                        if (response == '' || el.swap == 'none') {
-                            return;
-                        }
+                        if (el.swap == 'none') { return; }
 
+                        let response = xhr.responseText;
                         let targets = el.target ? document.querySelectorAll(el.target) : [event.currentTarget];
                         let adjacent = (el.swap != 'innerHTML' && el.swap != 'outerHTML');
                         for (let i = 0; i < targets.length; i++) {
