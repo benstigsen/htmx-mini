@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener(trigger, (event) => {
             event.preventDefault();
 
-            const el = elementMap[event.currentTarget];
+            const el = elementMap[event.target];
 
             let xhr = new XMLHttpRequest();
             xhr.open(el.type, el.url, true);
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (el.swap == 'none') { return; }
 
                     let response = xhr.responseText;
-                    let targets = el.target ? document.querySelectorAll(el.target) : [event.currentTarget];
+                    let targets = el.target ? document.querySelectorAll(el.target) : [event.target];
                     let adjacent = (el.swap != 'innerHTML' && el.swap != 'outerHTML');
                     for (let i = 0; i < targets.length; i++) {
                         if (el.swap == 'delete') {
