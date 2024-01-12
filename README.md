@@ -39,7 +39,7 @@ Like htmx we expect the data returned by the server to be HTML.
 
 <p>Type your information:</p>
 <form data-hxm-req="post" data-hxm-target="p" data-hxm-swap="innerHTML">
-    <label>Name <input type="text" name="name" autocomplete="off"/></label>
+    <label>Name <input type="text" name="name" /></label>
     <input type="submit" />
 </form>
 ```
