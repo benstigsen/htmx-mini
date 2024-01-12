@@ -17,6 +17,7 @@ It supports the following swap modes:
 - `afterbegin`
 - `beforeend`
 - `afterend`
+- `delete`
 - `none`
 
 If no trigger is defined, it uses the same defaults as htmx:

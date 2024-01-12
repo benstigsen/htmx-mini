@@ -1,6 +1,6 @@
 let elementMap = {};
 let requestTypes = ['get', 'post', 'put', 'delete', 'patch'];
-let swapMode = ['innerHTML', 'outerHTML', 'beforebegin', 'afterbegin', 'beforeend', 'afterend', 'none'];
+let swapMode = ['innerHTML', 'outerHTML', 'beforebegin', 'afterbegin', 'beforeend', 'afterend', 'delete', 'none'];
 
 document.addEventListener('DOMContentLoaded', () => {
     let elements = document.querySelectorAll('[data-hxm-req]');
@@ -70,9 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
 
                         let targets = el.targets;
-                        let adjacent = (el.swap != "innerHTML" && el.swap != "outerHTML");
+                        let adjacent = (el.swap != 'innerHTML' && el.swap != 'outerHTML');
                         for (let i = 0; i < targets.length; i++) {
-                            if (adjadenct) {
+                            if (el.swap == 'delete') {
+                                targets[i].parentNode.removeChild(targets[i]);
+                                continue;
+                            }
+
+                            if (adjacent) {
                                 targets[i].insertAdjacentHTML(el.swap, response);
                             } else {
                                 targets[i][el.swap] = response;
