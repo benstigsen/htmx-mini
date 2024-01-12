@@ -54,26 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
             xhr.open(el.type, el.url, true);
             xhr.onreadystatechange = () => {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    try {
-                        if (el.swap == 'none') { return; }
+                    if (el.swap == 'none') { return; }
 
-                        let response = xhr.responseText;
-                        let targets = el.target ? document.querySelectorAll(el.target) : [event.currentTarget];
-                        let adjacent = (el.swap != 'innerHTML' && el.swap != 'outerHTML');
-                        for (let i = 0; i < targets.length; i++) {
-                            if (el.swap == 'delete') {
-                                targets[i].parentNode.removeChild(targets[i]);
-                                continue;
-                            }
-
-                            if (adjacent) {
-                                targets[i].insertAdjacentHTML(el.swap, response);
-                            } else {
-                                targets[i][el.swap] = response;
-                            }
+                    let response = xhr.responseText;
+                    let targets = el.target ? document.querySelectorAll(el.target) : [event.currentTarget];
+                    let adjacent = (el.swap != 'innerHTML' && el.swap != 'outerHTML');
+                    for (let i = 0; i < targets.length; i++) {
+                        if (el.swap == 'delete') {
+                            targets[i].parentNode.removeChild(targets[i]);
+                            continue;
                         }
-                    } catch (e) {
-                        console.error(e);
+
+                        if (adjacent) {
+                            targets[i].insertAdjacentHTML(el.swap, response);
+                        } else {
+                            targets[i][el.swap] = response;
+                        }
                     }
                 }
             }
