@@ -1,5 +1,5 @@
 let elementMap = {};
-let requestTypes = ['get', 'post', 'put', 'delete', 'patch'];
+let requestType = ['get', 'post', 'put', 'delete', 'patch'];
 let swapMode = ['innerHTML', 'outerHTML', 'beforebegin', 'afterbegin', 'beforeend', 'afterend', 'delete', 'none'];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let element = elements[i];
 
         let type = element.getAttribute('data-hxm-req');
-        if (!requestTypes.includes(type.toLowerCase())) {
-            throw new Error(`Invalid request type: ${type}. It has to be one of ${requestTypes.join(', ')}`);
+        if (!requestType.includes(type.toLowerCase())) {
+            throw new Error(`Invalid request type: ${type}. It has to be one of ${requestType.join(', ')}`);
         }
 
         let url = element.getAttribute('data-hxm-url');
