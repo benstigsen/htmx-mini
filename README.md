@@ -2,6 +2,8 @@
 htmx is about 40KB _minified_, htmx-mini is <4KB _**un**minified_.  
 The project consists of a single JavaScript file, which is very easy to modify and extend.
 
+You can read about the development of this [on my website](https://stigsen.xyz/blog/developing-an-htmx-alternative.html).
+
 ## Documentation
 This does not contain all the functionality of htmx, _but_, it does contain
 what I consider to be the most valueable part of htmx.
