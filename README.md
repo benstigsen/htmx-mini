@@ -31,17 +31,19 @@ If a form is triggered, it includes the form data in the Ajax request.
 
 Like htmx we expect the data returned by the server to be HTML.
 
+Multiple triggers can be added `data-hxm-trigger="load, click, customevent"`
+
 ## Example
 ```html
-<h1 id="mytitle">Hello World!</h1>
-<button data-hxm-req="get" data-hxm-url="/content" data-hxm-target="#mytitle" data-hxm-delay="3000">
-    Get content with 3 second delay
+<h1>Hello World!</h1>
+<button data-hxm-req="get" data-hxm-url="/content">
+    Get content
 </button>
 
-<br>
 
+<p>Form</p>
 <p>Type your information:</p>
-<form data-hxm-req="post" data-hxm-target="p" data-hxm-swap="innerHTML">
+<form data-hxm-req="post" data-hxm-target="p" data-hxm-swap="beforeend">
     <label>Name <input type="text" name="name" /></label>
     <input type="submit" />
 </form>
